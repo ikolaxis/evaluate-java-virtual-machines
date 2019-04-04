@@ -1,2 +1,2 @@
 # evaluate-java-virtual-machines
-The Dockerfiles needed to evaluate Java Virtual Machines
+Contains the Dockerfiles that I used to evaluate Java Virtual Machines: HotSpot vs OpenJ9.
