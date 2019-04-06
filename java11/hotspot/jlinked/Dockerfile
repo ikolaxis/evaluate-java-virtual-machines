@@ -21,7 +21,7 @@ RUN ["jlink", "--no-header-files", \
      "--no-man-pages", \
      "--compress=2", \
      "--strip-debug", \
-     "--add-modules", "java.base,java.logging,java.sql,java.naming,java.desktop,java.management,java.security.jgss,java.instrument,jdk.unsupported", \
+     "--add-modules", "java.sql,java.naming,java.desktop,java.management,java.security.jgss,java.instrument,jdk.unsupported", \
      "--output", "java-light"]
 
 # Stage 3: Build the image that will be used for the Performance Tests
