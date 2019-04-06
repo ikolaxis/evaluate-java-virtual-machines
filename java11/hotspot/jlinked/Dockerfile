@@ -12,10 +12,8 @@ RUN git clone https://github.com/spring-projects/spring-petclinic.git
 
 WORKDIR /tmp/spring-petclinic
 RUN mvn install
-WORKDIR /tmp/spring-petclinic/target
 
-# Stage 2: Build a custom Java Runtime, for Spring-PetClinic
-FROM adoptopenjdk/openjdk11:latest as jlinker
+# Build a custom Java Runtime, for Spring-PetClinic
 WORKDIR /opt
 RUN ["jlink", "--no-header-files", \
      "--no-man-pages", \
@@ -24,7 +22,7 @@ RUN ["jlink", "--no-header-files", \
      "--add-modules", "java.sql,java.naming,java.desktop,java.management,java.security.jgss,java.instrument,jdk.unsupported", \
      "--output", "java-light"]
 
-# Stage 3: Build the image that will be used for the Performance Tests
+# Stage 2: Build the image that will be used for the Performance Tests
 FROM alpine:3.9
 
 # Following command was copied from AdoptOpenJDK Dockerfile 
@@ -52,7 +50,7 @@ RUN apk --update add --no-cache --virtual .build-deps curl binutils \
     && apk del --purge .build-deps \
     && rm -rf /tmp/${GLIBC_VER}.apk /tmp/gcc /tmp/gcc-libs.tar.xz /tmp/libz /tmp/libz.tar.xz /var/cache/apk/*
 
-COPY --from=jlinker /opt/java-light /opt/java-light/
+COPY --from=builder /opt/java-light /opt/java-light/
 
 ENV JAVA_VERSION jdk-11.0.2+9
 ENV JAVA_HOME=/opt/java-light
