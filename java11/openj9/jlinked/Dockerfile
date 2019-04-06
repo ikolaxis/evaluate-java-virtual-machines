@@ -15,7 +15,7 @@ RUN mvn install
 WORKDIR /tmp/spring-petclinic/target
 
 # Stage 2: Build a custom Java Runtime, for Spring-PetClinic
-FROM adoptopenjdk/openjdk11-openj9:latest AS jlinker
+FROM adoptopenjdk/openjdk11-openj9:latest as jlinker
 WORKDIR /opt
 RUN ["jlink", "--no-header-files", \
      "--no-man-pages", \
