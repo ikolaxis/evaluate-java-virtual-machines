@@ -12,7 +12,6 @@ RUN git clone https://github.com/spring-projects/spring-petclinic.git
 
 WORKDIR /tmp/spring-petclinic
 RUN mvn install
-WORKDIR /tmp/spring-petclinic/target
 
 # Stage 2: Build the image that will be used for the Performance Tests
 FROM adoptopenjdk/openjdk11-openj9:alpine-slim
