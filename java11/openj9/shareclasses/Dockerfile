@@ -17,10 +17,10 @@ RUN mvn install
 FROM adoptopenjdk/openjdk11-openj9:alpine-slim
 
 # The cached classes will be stored under this folder
-RUN mkdir /app/shareclasses
+RUN mkdir /tmp/shareclasses
 
 WORKDIR /app
 COPY --from=builder /tmp/spring-petclinic/target/spring-petclinic-2.1.0.BUILD-SNAPSHOT.jar /app
 
 # Run the application with the Class Data Sharing (CDS) feature enabled
-CMD ["java","-Xshareclasses:cacheDir=/app/shareclasses","-jar","spring-petclinic-2.1.0.BUILD-SNAPSHOT.jar"]
+CMD ["java","-Xshareclasses:cacheDir=/tmp/shareclasses","-jar","spring-petclinic-2.1.0.BUILD-SNAPSHOT.jar"]
