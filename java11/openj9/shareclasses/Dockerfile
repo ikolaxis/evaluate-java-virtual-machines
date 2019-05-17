@@ -17,7 +17,7 @@ RUN mvn install
 FROM adoptopenjdk/openjdk11-openj9:alpine-slim
 
 # The cached classes will be stored under this folder
-RUN mkdir /tmp/shareclasses
+WORKDIR /tmp/shareclasses
 
 WORKDIR /app
 COPY --from=builder /tmp/spring-petclinic/target/spring-petclinic-2.1.0.BUILD-SNAPSHOT.jar /app
