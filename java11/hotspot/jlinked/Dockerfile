@@ -23,7 +23,7 @@ RUN ["jlink", "--no-header-files", \
      "--output", "java-light"]
 
 # Stage 2: Build the image that will be used for the Performance Tests
-FROM alpine:3.9
+FROM alpine:3.18.5
 
 # Following command was copied from AdoptOpenJDK Dockerfile 
 RUN apk --update add --no-cache --virtual .build-deps curl binutils \
